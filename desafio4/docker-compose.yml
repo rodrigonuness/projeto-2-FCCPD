@@ -1,0 +1,24 @@
+services:
+  service_users:
+    build: ./service_users
+    container_name: desafio4-users
+    ports:
+      - "5001:5001"
+    networks:
+      - desafio4-net
+
+  service_reports:
+    build: ./service_reports
+    container_name: desafio4-reports
+    depends_on:
+      - service_users
+    environment:
+      SERVICE_USERS_URL: http://service_users:5001/users
+    ports:
+      - "5002:5002"
+    networks:
+      - desafio4-net
+
+networks:
+  desafio4-net:
+    name: desafio4-net

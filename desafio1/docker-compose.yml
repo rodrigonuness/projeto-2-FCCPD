@@ -1,0 +1,23 @@
+services:
+  server:
+    build: ./server
+    container_name: desafio1-server
+    ports:
+      - "8080:8080"
+    networks:
+      - desafio1-net
+
+  client:
+    build: ./client
+    container_name: desafio1-client
+    depends_on:
+      - server
+    environment:
+      TARGET_URL: http://server:8080/
+      INTERVAL_SECONDS: "5"
+    networks:
+      - desafio1-net
+
+networks:
+  desafio1-net:
+    name: desafio1-net

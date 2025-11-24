@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: desafio3-db
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - desafio3-net
+
+  cache:
+    image: redis:7-alpine
+    container_name: desafio3-cache
+    networks:
+      - desafio3-net
+
+  web:
+    build: ./web
+    container_name: desafio3-web
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
+      REDIS_HOST: cache
+      REDIS_PORT: "6379"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - cache
+    networks:
+      - desafio3-net
+
+networks:
+  desafio3-net:
+    name: desafio3-net
+
+volumes:
+  pgdata:
+    name: desafio3-pgdata

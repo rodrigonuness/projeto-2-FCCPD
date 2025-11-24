@@ -1,0 +1,22 @@
+services:
+  seed:
+    build: ./seed
+    container_name: desafio2-seed
+    environment:
+      DB_PATH: /data/desafio2.db
+    volumes:
+      - data-volume:/data
+
+  reader:
+    build: ./reader
+    container_name: desafio2-reader
+    depends_on:
+      - seed
+    environment:
+      DB_PATH: /data/desafio2.db
+    volumes:
+      - data-volume:/data
+
+volumes:
+  data-volume:
+    name: desafio2-data
