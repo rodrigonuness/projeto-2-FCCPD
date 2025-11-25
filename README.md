@@ -13,13 +13,3 @@ Clique em cada item para acessar a respectiva pasta:
 
 ---
 
-## Participantes do Projeto
-
-- **Bernardo Heuer**
-- **Rodrigo Nunes**
-- **Silvio Fittipaldi**
-- **Ronaldo Souto Maior**
-- **Luís Melo**
-- **Eduardo Roma**
-
----
