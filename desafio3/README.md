@@ -15,9 +15,9 @@ Aplicação Flask que depende de PostgreSQL e Redis. O objetivo é demonstrar a 
             │
    ┌────────┴────────┐
    │                 │
-┌───────┐       ┌────────┐
-│ Postgres │     │ Redis  │
-└───────┘       └────────┘
+┌──────────┐       ┌────────┐
+│ Postgres │       │ Redis  │
+└──────────┘       └────────┘
 ```
 
 ## Execução
@@ -35,6 +35,10 @@ Aplicação Flask que depende de PostgreSQL e Redis. O objetivo é demonstrar a 
    ```bash
    docker compose down
    ```
+
+## Observação:
+Professor, as vezes a porta 5000 pode estar ocupada pelo próprio docker, pode-se mudar a porta de 5000 para alguma outra (como 5003, por exemplo) se necessário.
+
 
 ## Boas práticas aplicadas
 - Uso de `depends_on` e rede interna `desafio3-net`.

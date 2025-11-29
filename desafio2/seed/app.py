@@ -2,17 +2,17 @@ import os
 import sqlite3
 from datetime import UTC, datetime
 
-DB_PATH = os.environ.get("DB_PATH", "/data/desafio2.db")
-SAMPLE_USERS = (
+CAMINHO_BD = os.environ.get("DB_PATH", "/data/desafio2.db")
+USUARIOS_EXEMPLO = (
     ("alice", "Alice Costa"),
     ("bruno", "Bruno Lima"),
     ("carla", "Carla Mendes"),
 )
 
 
-def seed_database() -> None:
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    connection = sqlite3.connect(DB_PATH)
+def popular_banco() -> None:
+    os.makedirs(os.path.dirname(CAMINHO_BD), exist_ok=True)
+    connection = sqlite3.connect(CAMINHO_BD)
     cursor = connection.cursor()
     cursor.execute(
         """
@@ -23,7 +23,7 @@ def seed_database() -> None:
         )
         """
     )
-    for username, full_name in SAMPLE_USERS:
+    for username, full_name in USUARIOS_EXEMPLO:
         cursor.execute(
             """
             INSERT INTO users (username, full_name, created_at)
@@ -39,8 +39,8 @@ def seed_database() -> None:
     connection.commit()
     cursor.close()
     connection.close()
-    print(f"Seed concluído em {DB_PATH}")
+    print(f"Seed concluído em {CAMINHO_BD}")
 
 
 if __name__ == "__main__":
-    seed_database()
+    popular_banco()

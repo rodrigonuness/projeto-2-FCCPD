@@ -7,30 +7,30 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-DB_CONFIG = {
+CONFIG_BD = {
     "dbname": os.environ.get("POSTGRES_DB", "appdb"),
     "user": os.environ.get("POSTGRES_USER", "appuser"),
     "password": os.environ.get("POSTGRES_PASSWORD", "apppass"),
     "host": os.environ.get("POSTGRES_HOST", "db"),
     "port": int(os.environ.get("POSTGRES_PORT", "5432")),
 }
-REDIS_HOST = os.environ.get("REDIS_HOST", "cache")
-REDIS_PORT = int(os.environ.get("REDIS_PORT", "6379"))
+HOST_REDIS = os.environ.get("REDIS_HOST", "cache")
+PORTA_REDIS = int(os.environ.get("REDIS_PORT", "6379"))
 
 
 @app.route("/")
-def healthcheck():
+def verificar_saude():
     status = {
         "timestamp": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
-        "postgres": check_postgres(),
-        "redis": check_redis(),
+        "postgres": verificar_postgres(),
+        "redis": verificar_redis(),
     }
     return jsonify(status)
 
 
-def check_postgres():
+def verificar_postgres():
     try:
-        with psycopg2.connect(**DB_CONFIG) as conn:
+        with psycopg2.connect(**CONFIG_BD) as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     "CREATE TABLE IF NOT EXISTS hits (id SERIAL PRIMARY KEY, created_at TIMESTAMP NOT NULL)"
@@ -44,9 +44,9 @@ def check_postgres():
         return {"ok": False, "error": str(exc)}
 
 
-def check_redis():
+def verificar_redis():
     try:
-        client = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
+        client = redis.Redis(host=HOST_REDIS, port=PORTA_REDIS, decode_responses=True)
         client.incr("hits")
         total = client.get("hits")
         return {"ok": True, "count": total}
