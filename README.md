@@ -1,7 +1,7 @@
 # Projeto da Disciplina FCCPD
 ---
 
-## 📂 Desafios
+## Desafios
 
 Clique em cada item para acessar a respectiva pasta:
 
@@ -12,4 +12,3 @@ Clique em cada item para acessar a respectiva pasta:
 - [Desafio 5](./desafio5/)
 
 ---
-
