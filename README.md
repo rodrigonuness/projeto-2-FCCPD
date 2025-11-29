@@ -12,3 +12,5 @@ Clique em cada item para acessar a respectiva pasta:
 - [Desafio 5](./desafio5/)
 
 ---
+
+## Aluno: Rodrigo Barreto Nunes de Miranda
