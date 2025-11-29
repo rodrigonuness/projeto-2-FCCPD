@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    """Return a small JSON payload with host and timestamp."""
     return jsonify(
         {
             "message": "Servidor do Desafio 1 ativo",
